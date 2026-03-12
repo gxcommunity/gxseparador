@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GXCOMMUNITY TOP 1 - ORGANIZAR MAPS GX</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            padding: 20px;
+            color: #2c2c2c;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border-radius: 20px;
+            border: 1px solid #333;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .header-text h1 {
+            font-size: 2.5em;
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .header-text p {
+            font-size: 1.1em;
+            color: #888;
+        }
+
+        .main-card {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .upload-area {
+            border: 3px dashed #444;
+            border-radius: 15px;
+            padding: 80px 20px;
+            text-align: center;
+            background: #0f0f0f;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 40px;
+        }
+
+        .upload-area:hover {
+            border-color: #dc2626;
+            background: #1a1a1a;
+            transform: translateY(-2px);
+        }
+
+        .upload-area.dragover {
+            border-color: #dc2626;
+            background: #1f1f1f;
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            margin-bottom: 25px;
+        }
+
+        .upload-area h3 {
+            color: #fff;
+            margin-bottom: 12px;
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+
+        .upload-area p {
+            color: #888;
+            font-size: 1.1em;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #dc2626;
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.2);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-content h4 {
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .stat-content .number {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .files-section {
+            margin-top: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #fff;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #dc2626;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .category-group {
+            margin-bottom: 25px;
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            border: 1px solid #333;
+        }
+
+        .category-header:hover {
+            transform: translateX(5px);
+            border-color: #dc2626;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+        }
+
+        .category-header h3 {
+            font-size: 1.3em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .badge {
+            background: rgba(220, 38, 38, 0.2);
+            color: #dc2626;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+            border: 1px solid #dc2626;
+        }
+
+        .file-list {
+            background: #0f0f0f;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .map-group {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .map-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #1f1f1f;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #333;
+        }
+
+        .map-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #e0e0e0;
+        }
+
+        .file-count {
+            background: rgba(220, 38, 38, 0.15);
+            color: #dc2626;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .file-item {
+            background: #141414;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+            border: 1px solid #222;
+        }
+
+        .file-item:hover {
+            transform: translateX(5px);
+            border-color: #dc2626;
+            background: #1a1a1a;
+        }
+
+        .file-name {
+            font-family: 'Courier New', monospace;
+            color: #e0e0e0;
+            font-size: 0.9em;
+        }
+
+        .file-ext {
+            background: #dc2626;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 18px 35px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: #dc2626;
+            color: white;
+            box-shadow: 0 5px 20px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #b91c1c;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(220, 38, 38, 0.6);
+        }
+
+        .btn-secondary {
+            background: #2a2a2a;
+            color: #e0e0e0;
+            border: 1px solid #444;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #333;
+            transform: translateY(-3px);
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .mini-btn {
+            background: rgba(220, 38, 38, 0.2);
+            border: 1px solid #dc2626;
+            color: #dc2626;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mini-btn:hover {
+            background: #dc2626;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .progress-section {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 40px;
+            background: #0f0f0f;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #dc2626 0%, #b91c1c 100%);
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .log-section {
+            margin-top: 30px;
+            background: #0a0a0a;
+            border-radius: 12px;
+            padding: 25px;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            max-height: 350px;
+            overflow-y: auto;
+            display: none;
+            border: 1px solid #1a1a1a;
+        }
+
+        .log-line {
+            margin-bottom: 8px;
+            animation: fadeIn 0.3s;
+            font-size: 0.9em;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #666;
+        }
+
+        .empty-state-icon {
+            margin-bottom: 25px;
+        }
+
+        .empty-state h3 {
+            color: #888;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s;
+            width: 20px;
+            height: 20px;
+        }
+
+        .toggle-icon.open {
+            transform: rotate(180deg);
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f0f0f;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #dc2626;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b91c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <img src="https://media.discordapp.net/attachments/1354954334751817741/1480626464415285298/gxstore2.png?ex=69b450d9&is=69b2ff59&hm=eeab4b5a136309a25ac46cf4476fa96615b1204df212a321cb901f7dc27aa82c&=&format=webp&quality=lossless" alt="Logo" class="logo">
+                <div class="header-text">
+                    <h1>GXCOMMUNITY Bot</h1>
+                    <p>Organizador Inteligente de Mapas e Resources - v2.0</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-card">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                </div>
+                <h3>Arraste sua pasta aqui</h3>
+                <p>ou clique para selecionar uma pasta</p>
+            </div>
+            <input type="file" id="folderInput" webkitdirectory directory multiple style="display: none;">
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+                            <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                            <polyline points="13 2 13 9 20 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h4>Total de Arquivos</h4>
+                        <div class="number" id="totalFiles">0</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h4>Mapas Detectados</h4>
+                        <div class="number" id="totalMaps">0</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h4>Categorias</h4>
+                        <div class="number" id="totalCategories">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="filesSection" class="files-section" style="display: none;">
+                <h2 class="section-title">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    Arquivos Organizados
+                </h2>
+                <div id="categoriesContainer"></div>
+            </div>
+
+            <div id="emptyState" class="empty-state">
+                <div class="empty-state-icon">
+                    <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </div>
+                <h3>Nenhum arquivo carregado</h3>
+                <p>Arraste uma pasta com seus resources para começar</p>
+            </div>
+
+            <div class="controls">
+                <button class="btn btn-secondary" id="clearBtn" disabled>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                    Limpar
+                </button>
+                <button class="btn btn-primary" id="downloadBtn" disabled>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Baixar Tudo (ZIP)
+                </button>
+                <button class="btn" id="downloadStreamBtn" disabled title="Gera um único ZIP via streaming (recomendado para muitos arquivos)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Baixar Tudo (ZIP Único)
+                </button>
+            </div>
+
+            <div class="progress-section" id="progressSection">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%;">0%</div>
+                </div>
+                <p style="text-align: center; color: #888;" id="progressText">Processando...</p>
+            </div>
+
+            <div class="log-section" id="logSection"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- fflate para ZIP em streaming -->
+    <script src="https://cdn.jsdelivr.net/npm/fflate@0.8.2/umd/index.min.js"></script>
+    <!-- StreamSaver para salvar grandes streams diretamente no disco -->
+    <script src="https://unpkg.com/streamsaver@2.0.6/streamsaver.js"></script>
+    <script>
+        class CodeWalkerOrganizer {
+            constructor() {
+                this.files = [];
+                this.organized = {};
+                this.init();
+            }
+
+            init() {
+                const uploadArea = document.getElementById('uploadArea');
+                const folderInput = document.getElementById('folderInput');
+
+                uploadArea.onclick = () => folderInput.click();
+
+                folderInput.onchange = (e) => {
+                    console.log('[v0] Arquivos selecionados:', e.target.files.length);
+                    if (e.target.files.length > 0) {
+                        try {
+                            this.handleFiles(e.target.files);
+                        } catch (error) {
+                            console.error('[v0] Erro ao processar arquivos:', error);
+                            this.log(`[ERRO] ${error.message}`);
+                            alert('Erro ao processar arquivos: ' + error.message);
+                        }
+                    }
+                };
+
+                uploadArea.ondragover = (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.add('dragover');
+                };
+
+                uploadArea.ondragleave = () => {
+                    uploadArea.classList.remove('dragover');
+                };
+
+                uploadArea.ondrop = (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.remove('dragover');
+                    console.log('[v0] Arquivos arrastados:', e.dataTransfer.files.length);
+                    if (e.dataTransfer.files.length > 0) {
+                        try {
+                            this.handleFiles(e.dataTransfer.files);
+                        } catch (error) {
+                            console.error('[v0] Erro ao processar arquivos:', error);
+                            this.log(`[ERRO] ${error.message}`);
+                            alert('Erro ao processar arquivos: ' + error.message);
+                        }
+                    }
+                };
+
+                document.getElementById('clearBtn').onclick = () => this.clear();
+                document.getElementById('downloadBtn').onclick = () => this.downloadZip();
+                const streamBtn = document.getElementById('downloadStreamBtn');
+                if (streamBtn) streamBtn.onclick = () => this.downloadZipStreamed();
+
+                // Configura MITM do StreamSaver (necessário para funcionar em localhost)
+                try {
+                    if (window.streamSaver) {
+                        window.streamSaver.mitm = 'https://jimmywarting.github.io/StreamSaver.js/mitm.html?version=2.0.6';
+                    }
+                } catch (e) {
+                    console.warn('[v0] StreamSaver não disponível:', e);
+                }
+            }
+
+            handleFiles(fileList) {
+                console.log('[v0] Iniciando processamento de arquivos...');
+                this.files = Array.from(fileList);
+                this.log(`[INFO] ${this.files.length} arquivos carregados`);
+                
+                if (this.files.length === 0) {
+                    alert('Nenhum arquivo encontrado!');
+                    return;
+                }
+                
+                const validExtensions = ['ymap', 'ytyp', 'ybn', 'ydr', 'ytd', 'yft', 'ydd', 'xml', 'meta', 'ymt'];
+                this.files = this.files.filter(file => {
+                    const ext = file.name.split('.').pop().toLowerCase();
+                    return validExtensions.includes(ext);
+                });
+                
+                this.log(`[INFO] ${this.files.length} arquivos válidos encontrados`);
+                console.log('[v0] Arquivos válidos:', this.files.length);
+                
+                if (this.files.length === 0) {
+                    alert('Nenhum arquivo de mapa válido encontrado! Certifique-se de selecionar uma pasta com arquivos .ymap, .ydr, .ybn, etc.');
+                    return;
+                }
+                
+                this.analyzeFiles();
+            }
+
+            extractMainPrefix(fileName) {
+                let name = fileName.toLowerCase().replace(/\.(ymap|ytyp|ybn|ydr|ytd|yft|ydd|xml|meta|ymt)$/i, '');
+                
+                name = name.replace(/_(lod|slod|slod2|slod3|slod4|hi|vhigh|hd)$/gi, '');
+                
+                name = name.replace(/_+\d+$/g, '');
+                
+                name = name.replace(/_+[a-z]$/gi, '');
+                
+                name = name.replace(/_+/g, '_').replace(/^_|_$/g, '');
+                
+                if (!name || name.length < 2) {
+                    return fileName.replace(/\.(ymap|ytyp|ybn|ydr|ytd|yft|ydd|xml|meta|ymt)$/i, '');
+                }
+                
+                return name;
+            }
+
+            calculateSimilarity(str1, str2) {
+                const longer = str1.length > str2.length ? str1 : str2;
+                const shorter = str1.length > str2.length ? str2 : str1;
+                
+                if (longer.length === 0) return 1.0;
+                
+                if (longer.includes(shorter)) return 0.9;
+                
+                const editDistance = this.levenshteinDistance(str1, str2);
+                return (longer.length - editDistance) / longer.length;
+            }
+
+            levenshteinDistance(str1, str2) {
+                const matrix = [];
+                
+                for (let i = 0; i <= str2.length; i++) {
+                    matrix[i] = [i];
+                }
+                
+                for (let j = 0; j <= str1.length; j++) {
+                    matrix[0][j] = j;
+                }
+                
+                for (let i = 1; i <= str2.length; i++) {
+                    for (let j = 1; j <= str1.length; j++) {
+                        if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+                            matrix[i][j] = matrix[i - 1][j - 1];
+                        } else {
+                            matrix[i][j] = Math.min(
+                                matrix[i - 1][j - 1] + 1,
+                                matrix[i][j - 1] + 1,
+                                matrix[i - 1][j] + 1
+                            );
+                        }
+                    }
+                }
+                
+                return matrix[str2.length][str1.length];
+            }
+
+            groupRelatedFiles() {
+                const groups = {};
+                
+                this.log('[FASE 1] Extraindo prefixos dos arquivos...');
+                console.log('[v0] Iniciando agrupamento...');
+                
+                this.files.forEach(file => {
+                    const prefix = this.extractMainPrefix(file.name);
+                    
+                    if (!groups[prefix]) {
+                        groups[prefix] = [];
+                    }
+                    
+                    groups[prefix].push(file);
+                });
+
+                this.log(`[FASE 1] ${Object.keys(groups).length} grupos iniciais criados`);
+                console.log('[v0] Grupos iniciais:', Object.keys(groups).length);
+                
+                this.log('[FASE 2] Mesclando grupos similares (threshold: 85%)...');
+                const groupNames = Object.keys(groups).sort();
+                const merged = new Set();
+                let mergeCount = 0;
+                
+                for (let i = 0; i < groupNames.length; i++) {
+                    if (merged.has(groupNames[i])) continue;
+                    
+                    for (let j = i + 1; j < groupNames.length; j++) {
+                        if (merged.has(groupNames[j])) continue;
+                        
+                        const name1 = groupNames[i];
+                        const name2 = groupNames[j];
+                        
+                        const similarity = this.calculateSimilarity(name1, name2);
+                        
+                        if (similarity > 0.85) {
+                            const percent = Math.round(similarity * 100);
+                            this.log(`[MERGE] "${name1}" + "${name2}" (${percent}% similar)`);
+                            
+                            const targetName = name1.length <= name2.length ? name1 : name2;
+                            const sourceName = name1.length <= name2.length ? name2 : name1;
+                            
+                            // Garantir que ambos os arrays existam antes de concatenar
+                            const targetList = groups[targetName] || groups[name1] || groups[name2] || [];
+                            const sourceList = groups[sourceName] || [];
+                            groups[targetName] = targetList.concat(sourceList);
+                            delete groups[sourceName];
+                            merged.add(sourceName);
+                            mergeCount++;
+                        }
+                    }
+                }
+
+                this.log(`[FASE 2] ${mergeCount} mesclagens realizadas`);
+                this.log(`[RESULTADO] ${Object.keys(groups).length} mapas únicos detectados`);
+                console.log('[v0] Mapas finais:', Object.keys(groups).length);
+                
+                const sortedGroups = Object.entries(groups).sort((a, b) => b[1].length - a[1].length);
+                this.log(`[INFO] Top 15 maiores grupos:`);
+                sortedGroups.slice(0, 15).forEach(([name, files], idx) => {
+                    this.log(`  ${idx + 1}. "${name}": ${files.length} arquivos`);
+                });
+                
+                return groups;
+            }
+
+            cleanName(name) {
+                return name
+                    .replace(/_/g, ' ')
+                    .replace(/\b\w/g, l => l.toUpperCase())
+                    .trim();
+            }
+
+            detectCategory(mapName) {
+                // Simplifica: todo mapa vai para "Outros"
+                return 'Outros';
+            }
+
+            computeGroupRelatedness(basePrefix, files) {
+                // Calcula média de similaridade entre o prefixo do grupo e o prefixo de cada arquivo
+                if (!files || files.length === 0) return 0;
+                let sum = 0;
+                let count = 0;
+                files.forEach(file => {
+                    const fp = this.extractMainPrefix(file.name);
+                    sum += this.calculateSimilarity(basePrefix, fp);
+                    count++;
+                });
+                return Math.round((sum / count) * 100);
+            }
+
+            analyzeFiles() {
+                try {
+                    this.organized = {};
+                    this.log('[SCAN] Analisando e agrupando arquivos relacionados...');
+                    console.log('[v0] Iniciando análise...');
+
+                    const fileGroups = this.groupRelatedFiles();
+
+                    Object.entries(fileGroups).forEach(([prefix, files]) => {
+                        const displayName = this.cleanName(prefix);
+                        const category = this.detectCategory(prefix);
+
+                        if (!this.organized[category]) {
+                            this.organized[category] = {};
+                        }
+
+                        const relatedness = this.computeGroupRelatedness(prefix, files);
+                        this.organized[category][displayName] = {
+                            baseName: prefix,
+                            files: files,
+                            relatedness
+                        };
+                    });
+
+                    this.log(`[OK] ${Object.keys(this.organized).length} categorias detectadas`);
+                    console.log('[v0] Categorias:', Object.keys(this.organized));
+                    
+                    Object.entries(this.organized).forEach(([category, maps]) => {
+                        this.log(`[INFO] ${category}: ${Object.keys(maps).length} mapas únicos`);
+                    });
+                    
+                    this.updateUI();
+                } catch (error) {
+                    console.error('[v0] Erro na análise:', error);
+                    this.log(`[ERRO] Falha na análise: ${error.message}`);
+                    alert('Erro ao analisar arquivos:\n' + error.message +
+                          '\n\nDica: verifique se a pasta contém arquivos de mapa válidos (.ymap, .ytyp, .ydr, .ybn) e se os nomes não possuem sufixos incomuns.');
+                }
+            }
+
+            updateUI() {
+                document.getElementById('emptyState').style.display = 'none';
+                document.getElementById('filesSection').style.display = 'block';
+
+                let totalMaps = 0;
+                Object.values(this.organized).forEach(cat => {
+                    totalMaps += Object.keys(cat).length;
+                });
+
+                document.getElementById('totalFiles').textContent = this.files.length;
+                document.getElementById('totalMaps').textContent = totalMaps;
+                document.getElementById('totalCategories').textContent = Object.keys(this.organized).length;
+
+                this.renderCategories();
+
+                document.getElementById('clearBtn').disabled = false;
+                document.getElementById('downloadBtn').disabled = false;
+                const streamBtn = document.getElementById('downloadStreamBtn');
+                if (streamBtn) streamBtn.disabled = false;
+            }
+
+            renderCategories() {
+                const container = document.getElementById('categoriesContainer');
+                container.innerHTML = '';
+
+                const sortedCategories = Object.entries(this.organized).sort((a, b) => {
+                    if (a[0] === 'Outros') return 1;
+                    if (b[0] === 'Outros') return -1;
+                    return a[0].localeCompare(b[0]);
+                });
+
+                for (let [category, maps] of sortedCategories) {
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'category-group';
+
+                    const header = document.createElement('div');
+                    header.className = 'category-header';
+                    header.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <h3>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                                ${category}
+                            </h3>
+                            <span class="badge">${Object.keys(maps).length} mapas</span>
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <button class="mini-btn" data-category="${category}">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                Download
+                            </button>
+                            <svg class="toggle-icon open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    `;
+
+                    const fileListDiv = document.createElement('div');
+                    fileListDiv.className = 'file-list';
+                    fileListDiv.style.display = 'block';
+
+                    const sortedMaps = Object.entries(maps).sort((a, b) => a[0].localeCompare(b[0]));
+
+                    for (let [mapName, mapData] of sortedMaps) {
+                        const mapGroup = document.createElement('div');
+                        mapGroup.className = 'map-group';
+
+                        const mapHeader = document.createElement('div');
+                        mapHeader.className = 'map-header';
+                        mapHeader.innerHTML = `
+                            <div class="map-title">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                <span>${mapName}</span>
+                                <span class="file-count">${mapData.files.length} arquivos</span>
+                                <span style="margin-left:8px; padding:2px 6px; border-radius:12px; background:#1f2937; color:#9ca3af; font-size:12px;">Parentesco: ${mapData.relatedness}%</span>
+                            </div>
+                            <button class="mini-btn" data-category="${category}" data-map="${mapName}">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                Download
+                            </button>
+                        `;
+                        mapGroup.appendChild(mapHeader);
+
+                        const sortedFiles = mapData.files.sort((a, b) => {
+                            const extA = a.name.split('.').pop();
+                            const extB = b.name.split('.').pop();
+                            if (extA !== extB) return extA.localeCompare(extB);
+                            return a.name.localeCompare(b.name);
+                        });
+
+                        sortedFiles.forEach(file => {
+                            const fileItem = document.createElement('div');
+                            fileItem.className = 'file-item';
+                            const ext = file.name.split('.').pop().toUpperCase();
+                            fileItem.innerHTML = `
+                                <span class="file-name">${file.name}</span>
+                                <span class="file-ext">${ext}</span>
+                            `;
+                            mapGroup.appendChild(fileItem);
+                        });
+
+                        fileListDiv.appendChild(mapGroup);
+                    }
+
+                    header.onclick = (e) => {
+                        if (e.target.closest('.mini-btn')) return;
+                        const icon = header.querySelector('.toggle-icon');
+                        if (fileListDiv.style.display === 'none') {
+                            fileListDiv.style.display = 'block';
+                            icon.classList.add('open');
+                        } else {
+                            fileListDiv.style.display = 'none';
+                            icon.classList.remove('open');
+                        }
+                    };
+
+                    categoryDiv.appendChild(header);
+                    categoryDiv.appendChild(fileListDiv);
+                    container.appendChild(categoryDiv);
+                }
+
+                document.querySelectorAll('.mini-btn').forEach(btn => {
+                    btn.onclick = (e) => {
+                        e.stopPropagation();
+                        const category = btn.dataset.category;
+                        const map = btn.dataset.map;
+                        if (map) {
+                            this.downloadMap(category, map);
+                        } else {
+                            this.downloadCategorySafe(category);
+                        }
+                    };
+                });
+            }
+
+            async downloadZip() {
+                this.log('[ZIP] Gerando arquivo completo organizado...');
+                document.getElementById('progressSection').style.display = 'block';
+                document.getElementById('progressText').textContent = 'Criando estrutura de pastas...';
+
+                try {
+                    const zip = new JSZip();
+                    let processed = 0;
+                    const total = this.files.length;
+
+                    for (let [category, maps] of Object.entries(this.organized)) {
+                        const categoryFolder = zip.folder(category);
+                        
+                        for (let [mapName, mapData] of Object.entries(maps)) {
+                            const mapFolder = categoryFolder.folder(mapName);
+                            
+                            for (let file of mapData.files) {
+                                mapFolder.file(file.name, file);
+                                processed++;
+                                const percent = Math.round((processed / total) * 100);
+                                document.getElementById('progressFill').style.width = percent + '%';
+                                document.getElementById('progressFill').textContent = percent + '%';
+                                document.getElementById('progressText').textContent = `Processando: ${file.name}`;
+                                
+                                if (processed % 10 === 0) {
+                                    await new Promise(resolve => setTimeout(resolve, 1));
+                                }
+                            }
+                        }
+                    }
+
+                    this.log('[SAVE] Comprimindo arquivos...');
+                    document.getElementById('progressText').textContent = 'Comprimindo arquivo ZIP...';
+                    
+                    const blob = await zip.generateAsync({ 
+                        type: 'blob',
+                        compression: "DEFLATE",
+                        compressionOptions: { level: 6 }
+                    }, (metadata) => {
+                        const percent = Math.round(metadata.percent);
+                        document.getElementById('progressFill').style.width = percent + '%';
+                        document.getElementById('progressFill').textContent = percent + '%';
+                    });
+                    
+                    this.log('[SAVE] Iniciando download...');
+                    this.triggerDownload(blob, 'CodeWalker_Organized_Complete.zip');
+
+                    this.log('[OK] Download completo iniciado com sucesso!');
+                    setTimeout(() => {
+                        document.getElementById('progressSection').style.display = 'none';
+                        document.getElementById('progressFill').style.width = '0%';
+                    }, 2000);
+                } catch (error) {
+                    this.log(`[ERRO] Falha ao gerar ZIP completo: ${error.message}`);
+                    alert('O arquivo é muito grande para um único ZIP. Vou dividir por categoria automaticamente.');
+                    // Fallback: gerar ZIPs por categoria
+                    document.getElementById('progressSection').style.display = 'block';
+                    document.getElementById('progressText').textContent = 'Gerando ZIPs por categoria...';
+                    await this.downloadAllByCategory();
+                    document.getElementById('progressSection').style.display = 'none';
+                }
+            }
+
+            // ZIP único via streaming (menor consumo de memória)
+            async downloadZipStreamed() {
+                try {
+                    if (!window.fflate) {
+                        alert('fflate indisponível. Usando modo padrão.');
+                        return await this.downloadZip();
+                    }
+
+                    this.log('[ZIP] Gerando ZIP único em streaming...');
+                    document.getElementById('progressSection').style.display = 'block';
+                    document.getElementById('progressText').textContent = 'Preparando streaming...';
+
+                    const total = this.files.length;
+                    let processed = 0;
+
+                    // Define o destino de escrita: File System Access (preferível) ou StreamSaver
+                    let writeChunk, closeSink;
+                    let fileName = 'CodeWalker_Organized_Complete.zip';
+                    if (window.showSaveFilePicker) {
+                        const handle = await window.showSaveFilePicker({
+                            suggestedName: fileName,
+                            types: [{ description: 'ZIP', accept: { 'application/zip': ['.zip'] } }]
+                        });
+                        const writable = await handle.createWritable();
+                        writeChunk = (chunk) => writable.write(chunk);
+                        closeSink = () => writable.close();
+                    } else if (window.streamSaver && typeof window.streamSaver.createWriteStream === 'function') {
+                        const fileStream = window.streamSaver.createWriteStream(fileName);
+                        const writer = fileStream.getWriter();
+                        writeChunk = (chunk) => writer.write(chunk);
+                        closeSink = () => writer.close();
+                    } else {
+                        alert('Streaming não suportado neste navegador. Usando modo padrão.');
+                        return await this.downloadZip();
+                    }
+
+                    let chain = Promise.resolve();
+                    const zip = new window.fflate.Zip({ level: 6 });
+                    zip.ondata = (chunk, final) => {
+                        chain = chain.then(() => writeChunk(chunk));
+                        if (final) chain = chain.then(() => closeSink());
+                    };
+
+                    // Função auxiliar para ler arquivo em chunks quando .stream() não estiver disponível
+                    const appendFile = async (file, deflate) => {
+                        if (file.stream && typeof file.stream === 'function') {
+                            const reader = file.stream().getReader();
+                            while (true) {
+                                const { value, done } = await reader.read();
+                                deflate.push(value ? (value instanceof Uint8Array ? value : new Uint8Array(value)) : new Uint8Array(), done);
+                                if (done) break;
+                            }
+                        } else {
+                            const CHUNK = 2 * 1024 * 1024; // 2MB
+                            let offset = 0;
+                            while (offset < (file.size || 0)) {
+                                const part = file.slice(offset, offset + CHUNK);
+                                const buf = await part.arrayBuffer();
+                                deflate.push(new Uint8Array(buf), false);
+                                offset += CHUNK;
+                            }
+                            deflate.push(new Uint8Array(), true);
+                        }
+                    };
+
+                    for (let [category, maps] of Object.entries(this.organized)) {
+                        for (let [mapName, mapData] of Object.entries(maps)) {
+                            for (let file of mapData.files) {
+                                const entryName = `${category}/${mapName}/${file.name}`.replace(/\\/g, '/');
+                                const deflate = new window.fflate.AsyncZipDeflate(entryName, { level: 6 });
+                                zip.add(deflate);
+
+                                await appendFile(file, deflate);
+
+                                processed++;
+                                const percent = Math.round((processed / total) * 100);
+                                document.getElementById('progressFill').style.width = percent + '%';
+                                document.getElementById('progressFill').textContent = percent + '%';
+                                document.getElementById('progressText').textContent = `Streaming: ${file.name}`;
+                                await new Promise(resolve => setTimeout(resolve, 0));
+                            }
+                        }
+                    }
+
+                    // Finaliza o ZIP
+                    zip.end();
+                    await chain;
+
+                    this.log('[OK] Download do ZIP único iniciado!');
+                    setTimeout(() => {
+                        document.getElementById('progressSection').style.display = 'none';
+                        document.getElementById('progressFill').style.width = '0%';
+                    }, 1500);
+                } catch (error) {
+                    console.error('[v0] Erro no ZIP streaming:', error);
+                    this.log(`[ERRO] ZIP único (streaming) falhou: ${error.message}`);
+                    alert('Não foi possível gerar o ZIP único. Vamos usar a divisão por categoria.');
+                    await this.downloadAllByCategory();
+                }
+            }
+
+            async downloadAllByCategory() {
+                try {
+                    const categories = Object.keys(this.organized);
+                    for (let i = 0; i < categories.length; i++) {
+                        const category = categories[i];
+                        this.log(`[FALLBACK] Processando categoria ${i + 1}/${categories.length}: ${category}`);
+                        await this.downloadCategorySafe(category);
+                        await new Promise(resolve => setTimeout(resolve, 200));
+                    }
+                    this.log('[FALLBACK] Todos os ZIPs por categoria foram gerados.');
+                } catch (err) {
+                    this.log(`[ERRO] Fallback falhou: ${err.message}`);
+                    alert('Não foi possível gerar os ZIPs por categoria.');
+                }
+            }
+
+            // Decide se deve dividir a categoria em partes
+            async downloadCategorySafe(category) {
+                const stats = this.computeCategoryStats(category);
+                // Limites padrão
+                let MAX_BYTES = 200 * 1024 * 1024; // 200MB por pacote
+                let MAX_FILES = 1500;              // 1500 arquivos por pacote
+
+                // Para "Outros" seja mais conservador
+                if (category === 'Outros') {
+                    MAX_BYTES = 80 * 1024 * 1024;  // 80MB por pacote
+                    MAX_FILES = 600;               // 600 arquivos por pacote
+                }
+
+                // Se não conseguimos estimar tamanho mas há muitos arquivos, dividir mesmo assim
+                const sizeUnknownButLarge = stats.totalSize === 0 && stats.totalFiles >= Math.min(800, MAX_FILES);
+
+                if (sizeUnknownButLarge || stats.totalSize > MAX_BYTES || stats.totalFiles > MAX_FILES || category === 'Outros') {
+                    this.log(`[SAFE] Categoria muito grande (arquivos: ${stats.totalFiles}, ~${Math.round(stats.totalSize/1024/1024)}MB). Dividindo em pacotes.`);
+                    await this.downloadCategoryChunked(category, MAX_BYTES, MAX_FILES);
+                } else {
+                    await this.downloadCategory(category);
+                }
+            }
+
+            computeCategoryStats(category) {
+                const maps = this.organized[category];
+                let totalFiles = 0;
+                let totalSize = 0;
+                Object.values(maps).forEach(mapData => {
+                    totalFiles += mapData.files.length;
+                    mapData.files.forEach(f => {
+                        if (typeof f.size === 'number') totalSize += f.size;
+                    });
+                });
+                return { totalFiles, totalSize };
+            }
+
+            async generateAndDownloadZip(zip, filename) {
+                this.log('[SAVE] Comprimindo pacote...');
+                document.getElementById('progressText').textContent = `Comprimindo ${filename}...`;
+                const blob = await zip.generateAsync({
+                    type: 'blob',
+                    compression: 'DEFLATE',
+                    compressionOptions: { level: 6 }
+                }, (metadata) => {
+                    const percent = Math.round(metadata.percent);
+                    document.getElementById('progressFill').style.width = percent + '%';
+                    document.getElementById('progressFill').textContent = percent + '%';
+                });
+                this.triggerDownload(blob, filename);
+            }
+
+            // Divide a categoria em vários ZIPs menores
+            async downloadCategoryChunked(category, maxBytes = 200*1024*1024, maxFiles = 1500) {
+                this.log(`[ZIP] Gerando categoria (em partes): ${category}...`);
+                document.getElementById('progressSection').style.display = 'block';
+                const stats = this.computeCategoryStats(category);
+                const estimatedChunks = Math.max(1, Math.ceil(Math.max(
+                    (stats.totalSize || 1) / maxBytes,
+                    stats.totalFiles / maxFiles
+                )));
+                const maps = this.organized[category];
+
+                let chunkIndex = 1;
+                let currentZip = new JSZip();
+                let currentSize = 0;
+                let currentCount = 0;
+
+                const updateStatus = () => {
+                    document.getElementById('progressText').textContent = `Gerando ${category} - pacote ${chunkIndex}/${estimatedChunks}`;
+                };
+
+                updateStatus();
+                
+                for (let [mapName, mapData] of Object.entries(maps)) {
+                    let folder = currentZip.folder(mapName);
+                    for (let file of mapData.files) {
+                        folder.file(file.name, file);
+                        currentCount++;
+                        if (typeof file.size === 'number') currentSize += file.size; else currentSize += 1024; // fallback pequeno
+
+                        const percent = Math.min(100, Math.round((currentCount / Math.min(stats.totalFiles, maxFiles)) * 100));
+                        document.getElementById('progressFill').style.width = percent + '%';
+                        document.getElementById('progressFill').textContent = percent + '%';
+                        document.getElementById('progressText').textContent = `Pacote ${chunkIndex}: adicionando ${file.name}`;
+
+                        if (currentSize >= maxBytes || currentCount >= maxFiles) {
+                            await this.generateAndDownloadZip(currentZip, `${category}_part${chunkIndex}.zip`);
+                            this.log(`[OK] ${category}_part${chunkIndex}.zip gerado.`);
+                            chunkIndex++;
+                            currentZip = new JSZip();
+                            currentSize = 0;
+                            currentCount = 0;
+                            updateStatus();
+                            await new Promise(resolve => setTimeout(resolve, 50));
+                            // recria a pasta caso o mesmo mapa continue no próximo chunk
+                            folder = currentZip.folder(mapName);
+                        }
+                    }
+                    await new Promise(resolve => setTimeout(resolve, 1));
+                }
+
+                if (currentCount > 0) {
+                    await this.generateAndDownloadZip(currentZip, `${category}_part${chunkIndex}.zip`);
+                    this.log(`[OK] ${category}_part${chunkIndex}.zip gerado.`);
+                }
+
+                setTimeout(() => {
+                    document.getElementById('progressSection').style.display = 'none';
+                    document.getElementById('progressFill').style.width = '0%';
+                }, 1500);
+            }
+
+            async downloadCategory(category) {
+                this.log(`[ZIP] Gerando categoria: ${category}...`);
+                document.getElementById('progressSection').style.display = 'block';
+
+                try {
+                    const zip = new JSZip();
+                    const maps = this.organized[category];
+                    let processed = 0;
+                    let total = 0;
+
+                    Object.values(maps).forEach(mapData => total += mapData.files.length);
+
+                    for (let [mapName, mapData] of Object.entries(maps)) {
+                        const folder = zip.folder(mapName);
+                        
+                        for (let file of mapData.files) {
+                            folder.file(file.name, file);
+                            processed++;
+                            const percent = Math.round((processed / total) * 100);
+                            document.getElementById('progressFill').style.width = percent + '%';
+                            document.getElementById('progressFill').textContent = percent + '%';
+                            
+                            if (processed % 5 === 0) {
+                                await new Promise(resolve => setTimeout(resolve, 1));
+                            }
+                        }
+                    }
+
+                    this.log('[SAVE] Preparando download da categoria...');
+                    const blob = await zip.generateAsync({ 
+                        type: 'blob',
+                        compression: "DEFLATE",
+                        compressionOptions: { level: 6 }
+                    });
+                    this.triggerDownload(blob, `${category}_Maps.zip`);
+
+                    this.log(`[OK] Download de ${category} iniciado!`);
+                    setTimeout(() => {
+                        document.getElementById('progressSection').style.display = 'none';
+                        document.getElementById('progressFill').style.width = '0%';
+                    }, 2000);
+                } catch (error) {
+                    this.log(`[ERRO] Falha ao gerar ZIP da categoria: ${error.message}`);
+                    alert('Erro ao gerar arquivo ZIP. Tente novamente.');
+                    document.getElementById('progressSection').style.display = 'none';
+                }
+            }
+
+            async downloadMap(category, mapName) {
+                this.log(`[ZIP] Gerando mapa: ${mapName}...`);
+                document.getElementById('progressSection').style.display = 'block';
+
+                try {
+                    const zip = new JSZip();
+                    const mapData = this.organized[category][mapName];
+                    let processed = 0;
+
+                    for (let file of mapData.files) {
+                        zip.file(file.name, file);
+                        processed++;
+                        const percent = Math.round((processed / mapData.files.length) * 100);
+                        document.getElementById('progressFill').style.width = percent + '%';
+                        document.getElementById('progressFill').textContent = percent + '%';
+                        await new Promise(resolve => setTimeout(resolve, 1));
+                    }
+
+                    this.log('[SAVE] Preparando download do mapa...');
+                    const blob = await zip.generateAsync({ 
+                        type: 'blob',
+                        compression: "DEFLATE",
+                        compressionOptions: { level: 6 }
+                    });
+                    const fileName = mapName.replace(/\s+/g, '_');
+                    this.triggerDownload(blob, `${fileName}.zip`);
+
+                    this.log(`[OK] Download de ${mapName} iniciado!`);
+                    setTimeout(() => {
+                        document.getElementById('progressSection').style.display = 'none';
+                        document.getElementById('progressFill').style.width = '0%';
+                    }, 2000);
+                } catch (error) {
+                    this.log(`[ERRO] Falha ao gerar ZIP do mapa: ${error.message}`);
+                    alert('Erro ao gerar arquivo ZIP. Tente novamente.');
+                    document.getElementById('progressSection').style.display = 'none';
+                }
+            }
+
+            triggerDownload(blob, filename) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+            }
+
+            log(message) {
+                const logSection = document.getElementById('logSection');
+                logSection.style.display = 'block';
+                const line = document.createElement('div');
+                line.className = 'log-line';
+                const time = new Date().toLocaleTimeString();
+                line.textContent = `[${time}] ${message}`;
+                logSection.appendChild(line);
+                logSection.scrollTop = logSection.scrollHeight;
+            }
+
+            clear() {
+                this.files = [];
+                this.organized = {};
+                document.getElementById('folderInput').value = '';
+                document.getElementById('emptyState').style.display = 'block';
+                document.getElementById('filesSection').style.display = 'none';
+                document.getElementById('clearBtn').disabled = true;
+                document.getElementById('downloadBtn').disabled = true;
+                document.getElementById('totalFiles').textContent = '0';
+                document.getElementById('totalMaps').textContent = '0';
+                document.getElementById('totalCategories').textContent = '0';
+                document.getElementById('logSection').innerHTML = '';
+                this.log('[CLEAR] Sistema limpo e pronto para novo upload!');
+            }
+        }
+
+        window.onload = () => {
+            window.organizer = new CodeWalkerOrganizer();
+        };
+    </script>
+</body>
+</html>
